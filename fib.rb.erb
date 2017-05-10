@@ -1,0 +1,21 @@
+<%
+  def repeated_call(fun, range)
+    %{
+      (#{range}).to_a.map do |i|
+        #{fun.to_s}(i)
+      end
+    }
+  end
+%>
+
+def fib(n)
+  if (n == 0 || n == 1)
+    1
+  else
+    fib(n - 1) + fib(n - 2)
+  end
+end
+
+list = <%= repeated_call(:fib, 0..10) %>
+
+puts list.join(', ')
